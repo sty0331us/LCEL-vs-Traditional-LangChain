@@ -1,0 +1,46 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lcel-vs-traditional-langchain"
+version = "1.0.0"
+description = "Production-ready comparison of Modern LCEL vs Traditional LangChain multi-step chaining"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "LCEL vs Traditional LangChain" }]
+dependencies = [
+  "langchain>=0.3.0,<0.4.0",
+  "langchain-core>=0.3.0,<0.4.0",
+  "langchain-openai>=0.2.0,<0.3.0",
+  "langchain-community>=0.3.0,<0.4.0",
+  "openai>=1.40.0,<2.0.0",
+  "pydantic>=2.7.0,<3.0.0",
+  "python-dotenv>=1.0.0,<2.0.0",
+  "tenacity>=8.2.0,<10.0.0",
+  "rich>=13.7.0,<14.0.0",
+  "typer>=0.12.0,<1.0.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0.0,<9.0.0", "pytest-asyncio>=0.23.0,<1.0.0", "ruff>=0.5.0,<1.0.0"]
+
+[project.scripts]
+lcel-compare = "examples.run_comparison:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "examples*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
